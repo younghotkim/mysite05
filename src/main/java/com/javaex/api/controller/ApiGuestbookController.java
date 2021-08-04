@@ -13,6 +13,7 @@ import com.javaex.service.GuestbookService;
 import com.javaex.vo.GuestbookVo;
 
 @Controller
+@RequestMapping(value="/api/guestbook")
 public class ApiGuestbookController {
 
 	@Autowired
@@ -21,7 +22,7 @@ public class ApiGuestbookController {
 	// ajax 리스트 가져오기
 	
 	@ResponseBody
-	@RequestMapping(value = "/api/guestbook/list", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/list", method = { RequestMethod.GET, RequestMethod.POST })
 	public List<GuestbookVo> list() {
 
 		System.out.println("[ApiGuestbookController.list()]");
@@ -36,7 +37,7 @@ public class ApiGuestbookController {
 	//ajax 방명록 저장
 	
 	@ResponseBody
-	@RequestMapping(value="/api/guestbook/write", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value="/write", method = { RequestMethod.GET, RequestMethod.POST })
 	public GuestbookVo write(@ModelAttribute GuestbookVo guestbookVo) {
 		
 		System.out.println("[ApiGuestbookController.write()]");
@@ -47,6 +48,20 @@ public class ApiGuestbookController {
 		
 		return resultVo;
 		
+	}
+	
+	//ajax 방명록 삭제
+	@ResponseBody
+	@RequestMapping(value="/remove", method = { RequestMethod.GET, RequestMethod.POST })
+	public int remove(@ModelAttribute GuestbookVo guestbookVo) {
+		
+		System.out.println("[ApiGuestbookController.remove()]");
+		
+		int count = guestbookService.removeGuest(guestbookVo);
+		
+		System.out.println(count + "건이 삭제되었습니다.");
+		
+		return count;
 	}
 	
 }
