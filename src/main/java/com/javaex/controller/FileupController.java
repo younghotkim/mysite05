@@ -17,7 +17,7 @@ public class FileupController {
 	@Autowired
 	private FileupService fileupService;
 	
-	@RequestMapping(value="/form", method = {RequestMethod.GET, RequestMethod.POST})
+	 
 	public String form() {
 		
 		System.out.println("[FileupController.form()]");
