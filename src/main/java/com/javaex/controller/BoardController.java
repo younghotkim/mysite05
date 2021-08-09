@@ -1,6 +1,7 @@
 package com.javaex.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -34,6 +35,28 @@ public class BoardController {
 
 		return "board/list";
 	}
+
+	// 게시판 페이징 리스트
+	@RequestMapping(value = "/list2", method = { RequestMethod.GET, RequestMethod.POST })
+	public String list2(Model model, 
+						@RequestParam(value = "crtPage", required = false, defaultValue = "1") int crtPage,
+						@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) {
+		
+		System.out.println("[BoardController.list2()]");
+		System.out.println(crtPage);
+		
+		Map<String, Object> listMap = boardService.getList2(crtPage, keyword);
+		
+		System.out.println(listMap);
+		
+		model.addAttribute("listMap", listMap);
+		
+		return "board/list2";
+		
+	}
+	
+	
+	
 
 	// 게시글 삭제
 	@RequestMapping(value = "/board/remove", method = { RequestMethod.GET, RequestMethod.POST })
@@ -102,7 +125,7 @@ public class BoardController {
 		System.out.println("[BoardController.writeForm()]");
 
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
-		
+
 		// 로그인 안한경우 -->메인
 		if (authUser == null) {
 			System.out.println("로그인 안한경우");
