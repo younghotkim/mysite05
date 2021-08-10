@@ -36,6 +36,15 @@
 		]]>
 	</select>
 
+	<!-- 회원정보 가져오기(아이디체크) -->
+	<select id="selectUserById" parameterType="String" resultType="int">
+		<![CDATA[
+			select count(*)
+			from users
+			where id = #{id}
+		]]>
+	</select>
+
 
 	<!-- 회원정보 수정 -->
 	<update id="updateUser" parameterType="com.javaex.vo.UserVo">
@@ -47,4 +56,14 @@
 			where no = #{no}    
 		]]>
 	</update>
+	
+		<!-- 회원정보 가져오기(아이디체크)2 -->
+	<select id="selectUserById2" parameterType="String" resultType="com.javaex.vo.UserVo">
+		<![CDATA[
+			select no, id
+			from users
+			where id = #{id}
+		]]>
+	</select>
+	
 </mapper>

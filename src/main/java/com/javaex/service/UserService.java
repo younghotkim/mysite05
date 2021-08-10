@@ -37,14 +37,41 @@ public class UserService {
 		UserVo userVo = userDao.selectUser(no);
 		return userVo;
 	}
-	
-	
-	//회원정보 수정
+
+	// 회원정보 수정
 	public int modifyUser(UserVo userVo) {
 		System.out.println("[UserService.modifyUser()]");
-		
+
 		int count = userDao.updateUser(userVo);
 		return count;
+	}
+
+	// 아이디 중복체크
+
+	public int idCheck(String id) {
+
+		System.out.println("[UserService.idCheck()]");
+
+		int count = userDao.selectUser(id);
+
+		return count;
+	}
+
+	// 아이디 중복체크2
+
+	public boolean getUser(String id) {
+
+		UserVo userVo = userDao.selectUser2(id);
+
+		if (userVo == null) {
+
+			return true;
+
+		} else {
+
+			return false;
+
+		}
 	}
 
 }

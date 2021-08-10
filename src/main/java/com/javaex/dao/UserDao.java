@@ -43,4 +43,22 @@ public class UserDao {
 		return sqlSession.update("user.updateUser", userVo);
 	}
 
+	// 아이디 중복체크
+
+	public int selectUser(String id) {
+
+		System.out.println("[UserDao.selectUser(id)]");
+
+		return sqlSession.selectOne("user.selectUserById", id);
+
+	}
+
+	// 회원정보 가져오기 --> 아이디 체크
+
+	public UserVo selectUser2(String id) {
+
+		return sqlSession.selectOne("user.selectUserById2", id);
+
+	}
+
 }
