@@ -52,4 +52,18 @@ public class GuestbookService {
 		return resultVo;
 		
 	}
+	
+	//no로 정보 가져오기
+	
+
+	public GuestbookVo readGuestbook(int no) {
+
+		System.out.println("[guestbookService.readGuest()]");
+		
+		GuestbookVo guestbookVo = guestbookDao.selectGuestbook(no);
+		
+		return guestbookVo;
+		
+	}
+
 }
